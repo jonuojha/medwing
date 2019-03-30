@@ -6,11 +6,11 @@ class HttpService {
     }
 
     getData(url) {
-        return axios.get(`${this.baseUrl}${url}`);
+        return axios.get(`${url}`);
     }
 
     updateData(url, data) {
-        return axios.put(`${this.baseUrl}${url}`, data);
+        return axios.put(`${url}`, data);
     }
 
     postData(url, data) {

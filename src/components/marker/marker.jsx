@@ -33,7 +33,6 @@ class Marker extends Component {
         return (
             <div className="col-12 col-sm-6 mb-4">
                 <Card className=''>
-                    {/*<h3>Berlin</h3>*/}
                     <CardHeader>
                         {
                             this.state.isEdit ?
@@ -43,19 +42,21 @@ class Marker extends Component {
                                         <Button onClick={this.save.bind(this)}>Save</Button>
                                     </InputGroupAddon>
                                 </InputGroup> :
-                                'Berlin'
+                                this.props.marker.address
                         }
 
                     </CardHeader>
                     <CardBody className='cord-body'>
-                        <label>Latitude: </label> <label>50.43</label>
+                        <label>Latitude: </label> <label>{this.props.marker.lat}</label>
                         <br/>
-                        <label>Longitude: </label> <label>30.32</label>
+                        <label>Longitude: </label> <label>{this.props.marker.lng}</label>
 
                         <div className='mt-4'>
-                            <Button disabled={this.state.isEdit} className='' onClick={this.enableEdit.bind(this)} outline color="secondary"
+                            <Button disabled={this.state.isEdit} className='' onClick={this.enableEdit.bind(this)}
+                                    outline color="secondary"
                                     size="sm">EDIT</Button>
-                            <Button disabled={this.state.isEdit} className='ml-3' outline color="secondary" size="sm">DELETE</Button>
+                            <Button disabled={this.state.isEdit} className='ml-3' outline color="secondary"
+                                    size="sm">DELETE</Button>
                         </div>
                     </CardBody>
                 </Card>

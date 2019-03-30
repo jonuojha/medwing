@@ -1,49 +1,34 @@
 import React, {Component} from 'react'
-import GoogleMapReact from "google-map-react";
 import './google.map.scss'
+import GoogleMapReact from 'google-map-react';
+import {Constants} from "../../constants/constants";
+
+// const Marker = <div className="SuperAwesomePin">AA</div>;
+
 
 class GoogleMap extends Component {
+    constructor(props) {
+        super(props);
+    }
 
-    renderMarkers(map, maps) {
-        new maps.Marker({
-            position: {
-                lat: 59.95,
-                lng: 30.33
-            },
-            map,
-            title: 'Hello World!'
-        });
-
-        new maps.Marker({
-            position: {
-                lat: 59.90,
-                lng: 30.33
-            },
-            map,
-            title: 'Hello World!'
-        });
-        new maps.Marker({
-            position: {
-                lat: 59.90,
-                lng: 30.34
-            },
-            map,
-            title: 'Hello World!'
-        });
+    componentDidMount() {
     }
 
     render() {
         return (
             <div className='map'>
                 <GoogleMapReact
-                    bootstrapURLKeys={{key: 'AIzaSyC60fyHb2IlmWqNEvC7FC43f71gfV5TgI0'}}
+                    bootstrapURLKeys={{key: Constants.GEO_API_KEY}}
                     defaultCenter={{
                         lat: 51.40,
                         lng: 10.45
                     }}
-                    onGoogleApiLoaded={({map, maps}) => this.renderMarkers(map, maps)}
-                    defaultZoom={6}
-                >
+                    defaultZoom={5}>
+                    {
+                        this.props.markers.map(mark =>
+                            <div lat={mark.lat} lng={mark.lng} className='marker'>A</div>
+                        )
+                    }
                 </GoogleMapReact>
             </div>
         )
