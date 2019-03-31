@@ -10,34 +10,22 @@ class App extends Component {
         super(props);
         this.state = {
             markers: [],
-            loading: true
+            loading: true,
+            error: ''
         }
     }
 
     componentDidMount() {
+        this.loadMarkers();
+    }
+
+    loadMarkers() {
+        this.setState({loading: true, error: ''});
         MarkerService.getMarkers().then(data => {
-            console.log('promise data', data);
             this.setState({markers: data, loading: false});
         }, err => {
-            this.setState({loading: false});
+            this.setState({loading: false, error: 'Failed to load markers'});
         })
-    }
-
-    addNewMarker(marker) {
-        console.log(marker);
-        this.setState({markers: [...this.state.markers, marker]});
-    }
-
-
-    deleteMarker(markerId) {
-        this.setState({markers: this.state.markers.filter(t => t.id !== markerId)}, () => {
-            console.log('markers', this.state.markers);
-        });
-    }
-
-    renameMarker(markerId, newName) {
-        this.state.markers.find(t => t.id === markerId).address = newName;
-        this.setState({markers: this.state.markers});
     }
 
     render() {
@@ -51,9 +39,8 @@ class App extends Component {
                     <div className='col-12 col-md-6'>
                         <MarkerContainer
                             loading={this.state.loading}
-                            addNewMarker={this.addNewMarker.bind(this)}
-                            renameMarker={this.renameMarker.bind(this)}
-                            deleteMarker={this.deleteMarker.bind(this)}
+                            error={this.state.error}
+                            loadMarkers={this.loadMarkers.bind(this)}
                             markers={this.state.markers}/>
                     </div>
                 </div>
