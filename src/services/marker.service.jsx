@@ -2,7 +2,7 @@ import HttpService from './http.serivce'
 
 class MarkerService {
     constructor() {
-        this.isLocal = true;
+        this.isLocal = false;
         this.basePath = '/api/markers';
     }
 

@@ -23,7 +23,7 @@ class MarkerContainer extends Component {
         e.preventDefault();
         this.setState({searching: true, error: ''});
         GeocodeService.getGeocode(this.state.address).then(resp => {
-
+                console.log(resp);
                 switch (resp.length) {
                     case 0:
                         this.setState({error: 'No results found', searching: false});
