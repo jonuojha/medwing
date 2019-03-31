@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dc269f40-8163-40aa-996e-73445259c800" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/marker-container/marker-container.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/marker-container/marker-container.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/marker/marker.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/marker/marker.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/marker/marker.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/marker/marker.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/geocode.service.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/geocode.service.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/http.serivce.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/http.serivce.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/marker.service.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/marker.service.jsx" afterDir="false" />
-    </list>
+    <list default="true" id="dc269f40-8163-40aa-996e-73445259c800" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,8 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/services/geocode.service.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="16" column="49" lean-forward="true" selection-start-line="16" selection-start-column="49" selection-end-line="16" selection-end-column="49" />
+            <state relative-caret-position="315">
+              <caret line="22" column="19" lean-forward="true" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
               <folding>
                 <element signature="e#0#49#0" expanded="true" />
               </folding>
@@ -163,7 +154,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554023133100" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554025058755" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -206,12 +197,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1553873883325</updated>
-      <workItem from="1553873885033" duration="44890000" />
+      <workItem from="1553873885033" duration="45151000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44890000" />
+    <option name="totallyTimeSpent" value="45151000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -550,8 +541,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/services/geocode.service.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="16" column="49" lean-forward="true" selection-start-line="16" selection-start-column="49" selection-end-line="16" selection-end-column="49" />
+        <state relative-caret-position="315">
+          <caret line="22" column="19" lean-forward="true" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
           <folding>
             <element signature="e#0#49#0" expanded="true" />
           </folding>
