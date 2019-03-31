@@ -7,7 +7,6 @@ import Input from "reactstrap/es/Input";
 import Marker from "../marker/marker";
 import GeocodeService from '../../services/geocode.service'
 import Fade from "reactstrap/es/Fade";
-import Alert from "reactstrap/es/Alert";
 import MerkerService from '../../services/marker.service';
 import Spinner from "reactstrap/es/Spinner";
 

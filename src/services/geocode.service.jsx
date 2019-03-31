@@ -1,14 +1,16 @@
 import {Constants} from "../constants/constants";
 import axios from "axios";
+import HttpService from './http.serivce';
 
 class GeocodeService {
     constructor() {
+        this.isLocal = true;
         this.geoApi = `https://maps.googleapis.com/maps/api/geocode/json?key=${Constants.GEO_API_KEY}`;
     }
 
     getGeocode(address) {
         const url = `${this.geoApi}&address=${address}`;
-        return axios.get(url).then(data => {
+        return this.getPromise(url, address).then(data => {
             return data.data.results.map(t => {
                 return {
                     id: t.place_id,
@@ -22,6 +24,10 @@ class GeocodeService {
         }).catch(e => {
             throw e
         });
+    }
+
+    getPromise(url, address) {
+        return this.isLocal ? axios.get(url) : HttpService.getData(`/api/geocode?&address=${address}`)
     }
 }
 

@@ -3,13 +3,7 @@ import './google.map.scss'
 import GoogleMapReact from 'google-map-react';
 import {Constants} from "../../constants/constants";
 
-// const Marker = <div className="SuperAwesomePin">AA</div>;
-
-
 class GoogleMap extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     componentDidMount() {
     }
