@@ -34,6 +34,7 @@ class Marker extends Component {
         MarkerService.renameMarker(this.props.marker.id, this.state.name).then(
             res => {
                 this.setState({isEdit: false, loading: false});
+                this.props.renameMarker(this.props.marker.id, this.state.name);
             },
             err => {
 

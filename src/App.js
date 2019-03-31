@@ -35,6 +35,11 @@ class App extends Component {
         });
     }
 
+    renameMarker(markerId, newName) {
+        this.state.markers.find(t => t.id === markerId).address = newName;
+        this.setState({markers: this.state.markers});
+    }
+
     render() {
         return (
             <div className="">
@@ -47,6 +52,7 @@ class App extends Component {
                         <MarkerContainer
                             loading={this.state.loading}
                             addNewMarker={this.addNewMarker.bind(this)}
+                            renameMarker={this.renameMarker.bind(this)}
                             deleteMarker={this.deleteMarker.bind(this)}
                             markers={this.state.markers}/>
                     </div>
