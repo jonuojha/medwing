@@ -8,6 +8,8 @@ import Marker from "../marker/marker";
 import GeocodeService from '../../services/geocode.service'
 import Fade from "reactstrap/es/Fade";
 import Alert from "reactstrap/es/Alert";
+import MerkerService from '../../services/marker.service';
+import Spinner from "reactstrap/es/Spinner";
 
 class MarkerContainer extends Component {
 
@@ -23,19 +25,22 @@ class MarkerContainer extends Component {
         }
     }
 
-    findAddress() {
+    findAddress(e) {
+        e.preventDefault();
         this.setState({searching: true, error: ''});
         GeocodeService.getGeocode(this.state.address).then(resp => {
                 console.log(resp);
 
-                if (!resp.length) {
-                    this.setState({error: 'No results found'});
+                switch (resp.length) {
+                    case 0:
+                        this.setState({error: 'No results found', searching: false});
+                        break;
+                    case 1:
+                        this.addToMarkerList(resp[0]);
+                        break;
+                    default:
+                        this.setState({results: resp, searching: false});
                 }
-                if (resp.length === 1) {
-                    this.addToMarkerList(resp[0]);
-                }
-
-                this.setState({results: resp, searching: false});
             },
             error => {
                 this.setState({error: 'Something went wrong.', searching: false});
@@ -47,13 +52,23 @@ class MarkerContainer extends Component {
     }
 
     selectAddress(address) {
-        console.log(address);
         this.addToMarkerList(address);
     }
 
     addToMarkerList(marker) {
-        this.props.addNewMarker(marker);
-        this.setState({results: [], address: ''});
+        this.setState({error: ''});
+        const found = this.props.markers.find(mark => marker.address === mark.address);
+        if (found) {
+            this.setState({error: 'This address already exists.', searching: false});
+        } else {
+            MerkerService.saveMarker(marker).then(data => {
+                this.props.addNewMarker(marker);
+                this.setState({results: [], address: '', searching: false});
+            }, err => {
+                this.setState({error: 'Failed to save address, please try again.'});
+            });
+
+        }
     }
 
     toggle() {
@@ -64,20 +79,25 @@ class MarkerContainer extends Component {
         return (
             <div className='marker-container'>
                 <div className='input-container'>
-                    <InputGroup>
+                    <form onSubmit={this.findAddress.bind(this)}>
+                        <InputGroup>
 
-                        <Input onChange={this.addressChange.bind(this)}
-                               placeholder="Enter address"
-                               value={this.state.address}
-                               onClick={this.toggle} data-toggle="dropdown"/>
+                            <Input onChange={this.addressChange.bind(this)}
+                                   placeholder="Enter address"
+                                   value={this.state.address}
+                                   onClick={this.toggle} data-toggle="dropdown"/>
 
-                        <InputGroupAddon addonType="append">
-                            <Button onClick={this.findAddress.bind(this)}
-                                    disabled={this.state.searching || !this.state.address}>
-                                {this.state.searching ? 'Searching...' : 'Add Address'}
-                            </Button>
-                        </InputGroupAddon>
-                    </InputGroup>
+                            <InputGroupAddon addonType="append">
+                                <Button
+                                        disabled={this.state.searching || !this.state.address}
+                                        color='primary'>
+                                    {this.state.searching ? 'Searching...' : 'Add Address'}
+                                </Button>
+                            </InputGroupAddon>
+
+                        </InputGroup>
+                    </form>
+
                     {
                         this.state.results.length > 1 ?
                             <div className='address-options p-2'>
@@ -101,6 +121,9 @@ class MarkerContainer extends Component {
                 </div>
                 <h2 className='pt-4'>YOUR MARKERS</h2>
                 <hr/>
+                <div className='spinner'>
+                    {this.props.loading ? <Spinner className='mt-5'/> : ''}
+                </div>
                 <div className='pt-2 markers row'>
                     {
                         this.props.markers.map((marker, index) =>

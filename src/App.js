@@ -9,14 +9,17 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            markers: []
+            markers: [],
+            loading: true
         }
     }
 
     componentDidMount() {
         MarkerService.getMarkers().then(data => {
             console.log('promise data', data);
-            this.setState({markers: data});
+            this.setState({markers: data, loading: false});
+        }, err => {
+            this.setState({loading: false});
         })
     }
 
@@ -28,7 +31,7 @@ class App extends Component {
 
     deleteMarker(marker) {
         console.log(marker);
-        this.setState({markers: this.state.markers.filter(t => t.address === marker.address)});
+        this.setState({markers: this.state.markers.filter(t => t.address !== marker.address)});
     }
 
     render() {
@@ -41,6 +44,7 @@ class App extends Component {
                     </div>
                     <div className='col-12 col-md-6'>
                         <MarkerContainer
+                            loading={this.state.loading}
                             addNewMarker={this.addNewMarker.bind(this)}
                             deleteMarker={this.deleteMarker.bind(this)}
                             markers={this.state.markers}/>

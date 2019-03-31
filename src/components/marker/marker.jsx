@@ -7,13 +7,16 @@ import CardBody from "reactstrap/es/CardBody";
 import InputGroup from "reactstrap/es/InputGroup";
 import InputGroupAddon from "reactstrap/es/InputGroupAddon";
 import Input from "reactstrap/es/Input";
+import Spinner from "reactstrap/es/Spinner";
+import MarkerService from "../../services/marker.service";
 
 class Marker extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            isEdit: false
+            isEdit: false,
+            loading: false
         }
     }
 
@@ -29,10 +32,25 @@ class Marker extends Component {
         this.setState({isEdit: true});
     }
 
+    deleteMarker() {
+        this.setState({loading: true});
+        MarkerService.deleteMarker(this.props.marker).then(data => {
+            this.props.deleteMarker(this.props.marker);
+            this.setState({loading: false});
+        }, err => {
+            this.setState({loading: false});
+        });
+    }
+
     render() {
         return (
             <div className="col-12 col-sm-6 mb-4">
-                <Card className=''>
+                <Card className='position-relative'>
+                    {
+                        this.state.loading ?
+                            <div className='overlay-spinner'><Spinner/></div>
+                            : ''
+                    }
                     <CardHeader>
                         {
                             this.state.isEdit ?
@@ -55,7 +73,8 @@ class Marker extends Component {
                             <Button disabled={this.state.isEdit} className='' onClick={this.enableEdit.bind(this)}
                                     outline color="secondary"
                                     size="sm">EDIT</Button>
-                            <Button disabled={this.state.isEdit} className='ml-3' outline color="secondary"
+                            <Button disabled={this.state.isEdit} onClick={this.deleteMarker.bind(this)} className='ml-3'
+                                    outline color="secondary"
                                     size="sm">DELETE</Button>
                         </div>
                     </CardBody>

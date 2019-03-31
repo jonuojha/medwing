@@ -13,6 +13,10 @@ class HttpService {
         return axios.put(`${url}`, data);
     }
 
+    deleteData(url) {
+        return axios.delete(`${url}`);
+    }
+
     postData(url, data) {
         return axios.post(`${this.baseUrl}${url}`, data);
     }

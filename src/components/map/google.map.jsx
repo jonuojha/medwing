@@ -25,8 +25,8 @@ class GoogleMap extends Component {
                     }}
                     defaultZoom={5}>
                     {
-                        this.props.markers.map(mark =>
-                            <div lat={mark.lat} lng={mark.lng} className='marker'>A</div>
+                        this.props.markers.map((mark, index) =>
+                            <div lat={mark.lat} lng={mark.lng} className='marker' key={index}>{''}</div>
                         )
                     }
                 </GoogleMapReact>
