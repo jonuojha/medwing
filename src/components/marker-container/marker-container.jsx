@@ -1,14 +1,9 @@
 import React, {Component} from 'react'
 import './marker-container.scss'
-import InputGroupAddon from "reactstrap/es/InputGroupAddon";
-import InputGroup from "reactstrap/es/InputGroup";
-import Button from "reactstrap/es/Button";
-import Input from "reactstrap/es/Input";
+import {InputGroupAddon, InputGroup, Button, Input, Fade, Spinner} from "reactstrap";
 import Marker from "../marker/marker";
 import GeocodeService from '../../services/geocode.service'
-import Fade from "reactstrap/es/Fade";
 import MerkerService from '../../services/marker.service';
-import Spinner from "reactstrap/es/Spinner";
 
 class MarkerContainer extends Component {
 

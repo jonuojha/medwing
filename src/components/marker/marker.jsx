@@ -1,15 +1,7 @@
 import React, {Component} from 'react';
 import './marker.scss';
-import Button from "reactstrap/es/Button";
-import Card from "reactstrap/es/Card";
-import CardHeader from "reactstrap/es/CardHeader";
-import CardBody from "reactstrap/es/CardBody";
-import InputGroup from "reactstrap/es/InputGroup";
-import InputGroupAddon from "reactstrap/es/InputGroupAddon";
-import Input from "reactstrap/es/Input";
-import Spinner from "reactstrap/es/Spinner";
+import {Button, Card, CardHeader, CardBody, InputGroup, InputGroupAddon, Input, Spinner, Fade} from "reactstrap";
 import MarkerService from "../../services/marker.service";
-import Fade from "reactstrap/es/Fade";
 
 class Marker extends Component {
 
