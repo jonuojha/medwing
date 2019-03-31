@@ -20,7 +20,7 @@ class App extends Component {
     }
 
     loadMarkers() {
-        this.setState({loading: true, error: ''});
+        this.setState({loading: true, error: '', markers: []});
         MarkerService.getMarkers().then(data => {
             this.setState({markers: data, loading: false});
         }, err => {

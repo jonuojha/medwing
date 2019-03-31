@@ -11,7 +11,7 @@ class MarkerService {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
                     resolve(this.getFromLocal());
-                }, 2000)
+                }, 200)
             })
         }
         return HttpService.getData(this.basePath).then(data => {
@@ -29,7 +29,7 @@ class MarkerService {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
                     resolve(marker);
-                }, 1500);
+                }, 700);
             })
         }
         return HttpService.postData(this.basePath, marker);
@@ -43,7 +43,7 @@ class MarkerService {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
                     resolve(newName);
-                }, 1500);
+                }, 700);
             })
         }
         const url = `${this.basePath}/${id}`;
@@ -57,7 +57,7 @@ class MarkerService {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
                     resolve(markerId);
-                }, 200);
+                }, 300);
             })
         }
         const url = `${this.basePath}/${markerId}`;
