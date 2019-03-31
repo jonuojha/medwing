@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import './App.scss';
-import GoogleMap from "./components/map/google.map";
-import Header from "./components/header/header";
-import MarkerContainer from "./components/marker-container/marker-container";
-import MarkerService from './services/marker.service'
+import './home.scss';
+import GoogleMap from "../map/google.map";
+import Header from "../header/header";
+import MarkerContainer from "../marker-container/marker-container";
+import MarkerService from '../../services/marker.service';
 
 class App extends Component {
     constructor(props) {
