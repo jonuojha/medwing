@@ -31,21 +31,34 @@ class MarkerService {
         return HttpService.postData(this.basePath, marker);
     }
 
-    editMarker() {
-
-    }
-
-    deleteMarker(marker) {
+    renameMarker(id, newName) {
         if (this.isLocal) {
             const markers = this.getFromLocal();
-            this.setInLocal(markers.filter(t => t.address !== marker.address));
+            const found = markers.find(t => t.id === id);
+            found.address = newName;
+            this.setInLocal(markers);
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
-                    resolve(marker);
+                    resolve(newName);
+                }, 1500);
+            })
+        }
+        const url = `${this.basePath}/${id}`;
+        return HttpService.updateData(url, {newName});
+    }
+
+    deleteMarker(markerId) {
+        if (this.isLocal) {
+            const markers = this.getFromLocal();
+            this.setInLocal(markers.filter(t => t.id !== markerId));
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(markerId);
                 }, 200);
             })
         }
-        return HttpService.postData(this.basePath, marker);
+        const url = `${this.basePath}/${markerId}`;
+        return HttpService.deleteData(url);
     }
 
     getFromLocal() {

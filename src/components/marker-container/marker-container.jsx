@@ -122,7 +122,11 @@ class MarkerContainer extends Component {
                 <h2 className='pt-4'>YOUR MARKERS</h2>
                 <hr/>
                 <div className='spinner'>
-                    {this.props.loading ? <Spinner className='mt-5'/> : ''}
+                    {
+                        this.props.loading ?
+                            <Spinner className='mt-5'/>
+                            : !this.props.markers.length ? <span>No markers</span> : ''
+                    }
                 </div>
                 <div className='pt-2 markers row'>
                     {

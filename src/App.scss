@@ -1,0 +1,37 @@
+.content {
+  color: #282c34;
+}
+
+.spinner-specific {
+  font-size: 2px;
+  color: #999;
+}
+
+.spinner {
+  color: #999;
+  text-align: center;
+
+  .spinner-border {
+    font-size: 2px;
+  }
+}
+
+.overlay-spinner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.7;
+  background: aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  font-size: 2px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}

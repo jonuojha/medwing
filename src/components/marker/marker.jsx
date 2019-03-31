@@ -16,26 +16,39 @@ class Marker extends Component {
         super(props);
         this.state = {
             isEdit: false,
-            loading: false
+            loading: false,
+            name: ''
         }
     }
 
-    addressChange() {
-
+    componentDidMount() {
     }
 
-    save() {
-        this.setState({isEdit: false});
+    addressChange(e) {
+        this.setState({name: e.target.value})
+    }
+
+    save(e) {
+        this.setState({loading: true});
+        e.preventDefault();
+        MarkerService.renameMarker(this.props.marker.id, this.state.name).then(
+            res => {
+                this.setState({isEdit: false, loading: false});
+            },
+            err => {
+
+            }
+        );
     }
 
     enableEdit() {
-        this.setState({isEdit: true});
+        this.setState({isEdit: true, name: this.props.marker.address});
     }
 
-    deleteMarker() {
+    deleteMarker(id) {
         this.setState({loading: true});
-        MarkerService.deleteMarker(this.props.marker).then(data => {
-            this.props.deleteMarker(this.props.marker);
+        MarkerService.deleteMarker(id).then(data => {
+            this.props.deleteMarker(id);
             this.setState({loading: false});
         }, err => {
             this.setState({loading: false});
@@ -54,12 +67,14 @@ class Marker extends Component {
                     <CardHeader>
                         {
                             this.state.isEdit ?
-                                <InputGroup>
-                                    <Input onChange={this.addressChange.bind(this)}/>
-                                    <InputGroupAddon addonType="append">
-                                        <Button onClick={this.save.bind(this)}>Save</Button>
-                                    </InputGroupAddon>
-                                </InputGroup> :
+                                <form onSubmit={this.save.bind(this)}>
+                                    <InputGroup>
+                                        <Input value={this.state.name} onChange={this.addressChange.bind(this)}/>
+                                        <InputGroupAddon addonType="append">
+                                            <Button>Save</Button>
+                                        </InputGroupAddon>
+                                    </InputGroup>
+                                </form> :
                                 this.props.marker.address
                         }
 
@@ -73,7 +88,8 @@ class Marker extends Component {
                             <Button disabled={this.state.isEdit} className='' onClick={this.enableEdit.bind(this)}
                                     outline color="secondary"
                                     size="sm">EDIT</Button>
-                            <Button disabled={this.state.isEdit} onClick={this.deleteMarker.bind(this)} className='ml-3'
+                            <Button disabled={this.state.isEdit}
+                                    onClick={this.deleteMarker.bind(this, this.props.marker.id)} className='ml-3'
                                     outline color="secondary"
                                     size="sm">DELETE</Button>
                         </div>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './App.css';
+import './App.scss';
 import GoogleMap from "./components/map/google.map";
 import Header from "./components/header/header";
 import MarkerContainer from "./components/marker-container/marker-container";
@@ -29,9 +29,10 @@ class App extends Component {
     }
 
 
-    deleteMarker(marker) {
-        console.log(marker);
-        this.setState({markers: this.state.markers.filter(t => t.address !== marker.address)});
+    deleteMarker(markerId) {
+        this.setState({markers: this.state.markers.filter(t => t.id !== markerId)}, () => {
+            console.log('markers', this.state.markers);
+        });
     }
 
     render() {

@@ -11,6 +11,7 @@ class GeocodeService {
         return HttpService.getData(url).then(data => {
             return data.data.results.map(t => {
                 return {
+                    id: t.place_id,
                     lat: t.geometry.location.lat,
                     lng: t.geometry.location.lng,
                     address: t.formatted_address,
