@@ -29,7 +29,6 @@ class MarkerContainer extends Component {
         e.preventDefault();
         this.setState({searching: true, error: ''});
         GeocodeService.getGeocode(this.state.address).then(resp => {
-                console.log(resp);
 
                 switch (resp.length) {
                     case 0:
@@ -62,10 +61,10 @@ class MarkerContainer extends Component {
             this.setState({error: 'This address already exists.', searching: false});
         } else {
             MerkerService.saveMarker(marker).then(data => {
-                this.props.addNewMarker(marker);
+                this.props.loadMarkers();
                 this.setState({results: [], address: '', searching: false});
             }, err => {
-                this.setState({error: 'Failed to save address, please try again.'});
+                this.setState({error: 'Failed to save address, please try again.', searching: false});
             });
 
         }
@@ -89,8 +88,8 @@ class MarkerContainer extends Component {
 
                             <InputGroupAddon addonType="append">
                                 <Button
-                                        disabled={this.state.searching || !this.state.address}
-                                        color='primary'>
+                                    disabled={this.state.searching || !this.state.address}
+                                    color='primary'>
                                     {this.state.searching ? 'Searching...' : 'Add Address'}
                                 </Button>
                             </InputGroupAddon>
@@ -125,7 +124,12 @@ class MarkerContainer extends Component {
                     {
                         this.props.loading ?
                             <Spinner className='mt-5'/>
-                            : !this.props.markers.length ? <span>No markers</span> : ''
+                            :
+                            this.props.error ?
+                                <Fade in={!!this.props.error} tag="label" className="m-1">
+                                    {this.props.error}
+                                </Fade>
+                                : !this.props.markers.length ? <span>No markers</span> : ''
                     }
                 </div>
                 <div className='pt-2 markers row'>

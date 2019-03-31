@@ -9,6 +9,7 @@ import InputGroupAddon from "reactstrap/es/InputGroupAddon";
 import Input from "reactstrap/es/Input";
 import Spinner from "reactstrap/es/Spinner";
 import MarkerService from "../../services/marker.service";
+import Fade from "reactstrap/es/Fade";
 
 class Marker extends Component {
 
@@ -17,41 +18,43 @@ class Marker extends Component {
         this.state = {
             isEdit: false,
             loading: false,
-            name: ''
+            newName: '',
+            error: ''
         }
     }
 
     componentDidMount() {
     }
 
-    addressChange(e) {
-        this.setState({name: e.target.value})
+    nameChange(e) {
+        this.setState({newName: e.target.value})
     }
 
-    save(e) {
-        this.setState({loading: true});
+    saveNewName(e) {
+        this.setState({loading: true, error: ''});
         e.preventDefault();
-        MarkerService.renameMarker(this.props.marker.id, this.state.name).then(
+        MarkerService.renameMarker(this.props.marker.id, this.state.newName).then(
             res => {
                 this.setState({isEdit: false, loading: false});
+                this.props.loadMarkers();
             },
             err => {
-
+                this.setState({loading: false, error: 'Failed to update name'});
             }
         );
     }
 
     enableEdit() {
-        this.setState({isEdit: true, name: this.props.marker.address});
+        this.setState({isEdit: true, newName: this.props.marker.name});
     }
 
     deleteMarker(id) {
-        this.setState({loading: true});
+        this.setState({loading: true, error: ''});
         MarkerService.deleteMarker(id).then(data => {
-            this.props.deleteMarker(id);
+            this.props.loadMarkers();
             this.setState({loading: false});
         }, err => {
-            this.setState({loading: false});
+            this.setState({loading: false, error: 'Failed to delete marker'});
         });
     }
 
@@ -67,19 +70,20 @@ class Marker extends Component {
                     <CardHeader>
                         {
                             this.state.isEdit ?
-                                <form onSubmit={this.save.bind(this)}>
+                                <form onSubmit={this.saveNewName.bind(this)}>
                                     <InputGroup>
-                                        <Input value={this.state.name} onChange={this.addressChange.bind(this)}/>
+                                        <Input value={this.state.newName} onChange={this.nameChange.bind(this)}/>
                                         <InputGroupAddon addonType="append">
-                                            <Button>Save</Button>
+                                            <Button disabled={!this.state.newName}>Save</Button>
                                         </InputGroupAddon>
                                     </InputGroup>
                                 </form> :
-                                this.props.marker.address
+                                this.props.marker.name
                         }
 
                     </CardHeader>
                     <CardBody className='cord-body'>
+                        <p>{this.props.marker.address}</p>
                         <label>Latitude: </label> <label>{this.props.marker.lat}</label>
                         <br/>
                         <label>Longitude: </label> <label>{this.props.marker.lng}</label>
@@ -93,6 +97,9 @@ class Marker extends Component {
                                     outline color="secondary"
                                     size="sm">DELETE</Button>
                         </div>
+                        <Fade in={!!this.state.error} tag="label" className="m-1">
+                            {this.state.error}
+                        </Fade>
                     </CardBody>
                 </Card>
             </div>

@@ -2,7 +2,7 @@ import HttpService from './http.serivce'
 
 class MarkerService {
     constructor() {
-        this.isLocal = true;
+        this.isLocal = false;
         this.basePath = '/api/markers';
     }
 
@@ -14,7 +14,11 @@ class MarkerService {
                 }, 2000)
             })
         }
-        return HttpService.getData(this.basePath);
+        return HttpService.getData(this.basePath).then(data => {
+            return data.data;
+        }).catch(e => {
+            throw e
+        });
     }
 
     saveMarker(marker) {
@@ -34,8 +38,7 @@ class MarkerService {
     renameMarker(id, newName) {
         if (this.isLocal) {
             const markers = this.getFromLocal();
-            const found = markers.find(t => t.id === id);
-            found.address = newName;
+            markers.find(t => t.id === id).name = newName;
             this.setInLocal(markers);
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
