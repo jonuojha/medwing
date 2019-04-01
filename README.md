@@ -38,7 +38,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 Using [reactstrap](https://reactstrap.github.io/), which will make development faster with 
 pre-defined components
 
-###Bootstrap CSS
+### Bootstrap CSS
 
 Makes styling more convenient
   
