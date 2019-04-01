@@ -39,9 +39,11 @@ Using [reactstrap](https://reactstrap.github.io/), which will make development f
 pre-defined components
 
 ###Bootstrap CSS
-Makes styling more convenient  
+
+Makes styling more convenient
+  
 ## Functional design
-- If Geocode provider returns multiple address for given input, we will show them option to select.
+- If Geocode provider returns multiple address for given input, we will show them option to select. e.g. search for `torstra`
 - Spinner states while loading resources.
 
 ## Mobile Responsive
