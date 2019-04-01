@@ -10,7 +10,7 @@ Install npm and run below command
 ### `npm i`
 
 
-## To launch app
+## Launch scripts
 
 In the project directory, you can run:
 
@@ -31,3 +31,19 @@ The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+## Design
+
+### Reactstrap
+Using [reactstrap](https://reactstrap.github.io/), which will make development faster with 
+pre-defined components
+
+###Bootstrap CSS
+Makes styling more convenient  
+## Functional design
+- If Geocode provider returns multiple address for given input, we will show them option to select.
+- Spinner states while loading resources.
+
+## Mobile Responsive
+
+Application is mobile responsive to all devices and all view ports 

@@ -15,13 +15,14 @@ class Marker extends Component {
         }
     }
 
-    componentDidMount() {
-    }
-
     nameChange(e) {
         this.setState({newName: e.target.value})
     }
 
+    /**
+     * Will update respective marker name in database
+     * @param e
+     */
     saveNewName(e) {
         this.setState({loading: true, error: ''});
         e.preventDefault();
@@ -36,10 +37,17 @@ class Marker extends Component {
         );
     }
 
+    /**
+     * Will enable editing for marker name
+     */
     enableEdit() {
         this.setState({isEdit: true, newName: this.props.marker.name});
     }
 
+    /**
+     * Delete marker
+     * @param id
+     */
     deleteMarker(id) {
         this.setState({loading: true, error: ''});
         MarkerService.deleteMarker(id).then(data => {
@@ -52,7 +60,7 @@ class Marker extends Component {
 
     render() {
         return (
-            <div className="col-12 col-sm-6 mb-4">
+            <div className="col-12 col-lg-6 mb-4">
                 <Card className='position-relative'>
                     {
                         this.state.loading ?
@@ -81,11 +89,11 @@ class Marker extends Component {
                         <label>Longitude: </label> <label>{this.props.marker.lng}</label>
 
                         <div className='mt-4'>
-                            <Button disabled={this.state.isEdit} className='' onClick={this.enableEdit.bind(this)}
+                            <Button disabled={this.state.isEdit} className='mr-3' onClick={this.enableEdit.bind(this)}
                                     outline color="secondary"
                                     size="sm">EDIT</Button>
                             <Button disabled={this.state.isEdit}
-                                    onClick={this.deleteMarker.bind(this, this.props.marker.id)} className='ml-3'
+                                    onClick={this.deleteMarker.bind(this, this.props.marker.id)} className=''
                                     outline color="secondary"
                                     size="sm">DELETE</Button>
                         </div>

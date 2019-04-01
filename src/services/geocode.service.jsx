@@ -4,12 +4,11 @@ import HttpService from './http.serivce';
 
 class GeocodeService {
     constructor() {
-        this.isLocal = false;
         this.geoApi = `https://maps.googleapis.com/maps/api/geocode/json?key=${Constants.GEO_API_KEY}`;
     }
 
     getGeocode(address) {
-        if (this.isLocal) {
+        if (HttpService.isLocal) {
             const url = `${this.geoApi}&address=${address}`;
             return axios.get(url).then(data => {
                 return data.data.results.map(t => {

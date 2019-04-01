@@ -35,3 +35,10 @@ ul {
   list-style: none;
   padding: 0;
 }
+
+.page-width {
+  padding: 1rem;
+  @media(min-width: 576px) {
+    padding: 3rem;
+  }
+}

@@ -19,17 +19,20 @@ class MarkerContainer extends Component {
         }
     }
 
+    /**
+     * Will search for given address with Geocode apis
+     * @param e
+     */
     findAddress(e) {
         e.preventDefault();
         this.setState({searching: true, error: ''});
         GeocodeService.getGeocode(this.state.address).then(resp => {
-                console.log(resp);
                 switch (resp.length) {
                     case 0:
                         this.setState({error: 'No results found', searching: false});
                         break;
                     case 1:
-                        this.addToMarkerList(resp[0]);
+                        this.selectAddress(resp[0]);
                         break;
                     default:
                         this.setState({results: resp, searching: false});
@@ -44,12 +47,14 @@ class MarkerContainer extends Component {
         this.setState({address: e.target.value, error: ''})
     }
 
-    selectAddress(address) {
-        this.addToMarkerList(address);
-    }
-
-    addToMarkerList(marker) {
+    /**
+     * If address is valid, this method will save marker at backend with it's not duplicate
+     * @param marker
+     */
+    selectAddress(marker) {
         this.setState({error: ''});
+
+        // Check if address already exists
         const found = this.props.markers.find(mark => marker.address === mark.address);
         if (found) {
             this.setState({error: 'This address already exists.', searching: false});
@@ -64,10 +69,6 @@ class MarkerContainer extends Component {
         }
     }
 
-    toggle() {
-
-    }
-
     render() {
         return (
             <div className='marker-container'>
@@ -77,8 +78,7 @@ class MarkerContainer extends Component {
 
                             <Input onChange={this.addressChange.bind(this)}
                                    placeholder="Enter address"
-                                   value={this.state.address}
-                                   onClick={this.toggle} data-toggle="dropdown"/>
+                                   value={this.state.address}/>
 
                             <InputGroupAddon addonType="append">
                                 <Button
@@ -97,9 +97,9 @@ class MarkerContainer extends Component {
                                 <span className='mt-2'>Multiple addresses found, choose your option</span>
                                 <ul>
                                     {
-                                        this.state.results.map(add =>
+                                        this.state.results.map(mark =>
                                             <li className='p-2'
-                                                onClick={this.selectAddress.bind(this, add)}>{add.address}</li>
+                                                onClick={this.selectAddress.bind(this, mark)}>{mark.address}</li>
                                         )
                                     }
                                 </ul>

@@ -19,6 +19,9 @@ class App extends Component {
         this.loadMarkers();
     }
 
+    /**
+     * Get all markers from back-end and propagate them to child components
+     */
     loadMarkers() {
         this.setState({loading: true, error: '', markers: []});
         MarkerService.getMarkers().then(data => {
@@ -32,7 +35,7 @@ class App extends Component {
         return (
             <div className="">
                 <Header/>
-                <div className="content row p-5">
+                <div className="content row page-width">
                     <div className='col-12 col-md-6 mb-4'>
                         <GoogleMap markers={this.state.markers}/>
                     </div>
