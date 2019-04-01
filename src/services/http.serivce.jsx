@@ -2,7 +2,7 @@ import axios from 'axios';
 
 class HttpService {
     constructor() {
-        this.isLocal = true;
+        this.isLocal = false;
         this.host = "http://localhost:8080";
     }
 
